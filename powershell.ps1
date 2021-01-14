@@ -30,9 +30,6 @@ Choco-Install -Apps `
 
 Remove-Item "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Invoke-WebRequest https://raw.githubusercontent.com/jgsqware/dotfile-win/main/WindowsTerminal/settings.json -OutFile "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-
-New-Item -ItemType SymbolicLink -Path "" -Target 
-
     
 
 Store-Install -Apps `
@@ -40,7 +37,9 @@ Store-Install -Apps `
 
 # Set Brave as default
 Invoke-WebRequest https://raw.githubusercontent.com/jgsqware/dotfile-win/main/bin/SetDefaultBrowser.exe -OutFile $env:USERPROFILE\Downloads\SetDefaultBrowser.exe
-powershell.exe -Command "$env:USERPROFILE\Downloads\SetDefaultBrowser.exe HKCU Brave.VPPBGSWEIISBSHOCGFKRMYT66E"
+$hive = & $env:USERPROFILE\Downloads\SetDefaultBrowser.exe | out-string -stream | select-string -Pattern '(HKCU) (Brave.*)'
+
+powershell.exe -Command "$env:USERPROFILE\Downloads\SetDefaultBrowser.exe $hive"
 Remove-Item $env:USERPROFILE\Downloads\SetDefaultBrowser.exe
 
 # Configure TaskBar https://docs.microsoft.com/en-us/windows/configuration/configure-windows-10-taskbar
