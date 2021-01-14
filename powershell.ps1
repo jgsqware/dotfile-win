@@ -15,7 +15,7 @@ function Store-Install {
 
     Write-Host ">> Install those apps from the Microsoft Store:"
     foreach ($app in $Apps) {
-        Write-Host "- ${app}"
+        Write-Host "- ${app}" -ForegroundColor Green
     }
 }
 
@@ -69,15 +69,14 @@ Read-Host 'Press ENTER to continue...'
 
 # WSL 2
 Write-Host '>> Setup WSL 2'
+$msiFilePath="$env:USERPROFILE\Downloads\wsl_update_x64.msi"
+Invoke-WebRequest https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi -OutFile $msiFilePath
 
-wsl --set-default-version 2
-
-Invoke-WebRequest https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi -OutFile $env:USERPROFILE\Downloads\wsl_update_x64.msi
-
-& $env:USERPROFILE\Downloads\wsl_update_x64.msi
-
+$arguments = "/i `"$msiFilePath`""
+Start-Process msiexec.exe -ArgumentList $arguments -Wait
 Remove-Item -recurse $env:USERPROFILE\Downloads\wsl_update_x64.msi
 
+wsl --set-default-version 2
 
 Write-Host 'Install Ubuntu on WSL:'
 Write-Host '  https://www.microsoft.com/en-gb/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab' -ForegroundColor Blue
