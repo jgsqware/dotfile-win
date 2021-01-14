@@ -40,8 +40,9 @@ Store-Install -Apps `
 
 # Set Brave as default
 Invoke-WebRequest https://raw.githubusercontent.com/jgsqware/dotfile-win/main/bin/SetDefaultBrowser.exe -OutFile $env:USERPROFILE\Downloads\SetDefaultBrowser.exe
-$env:USERPROFILE\Downloads\SetDefaultBrowser.exe HKCU Brave.VPPBGSWEIISBSHOCGFKRMYT66E
+powershell.exe -Command "$env:USERPROFILE\Downloads\SetDefaultBrowser.exe HKCU Brave.VPPBGSWEIISBSHOCGFKRMYT66E"
 Remove-Item $env:USERPROFILE\Downloads\SetDefaultBrowser.exe
+
 # Configure TaskBar https://docs.microsoft.com/en-us/windows/configuration/configure-windows-10-taskbar
 
 Invoke-WebRequest https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip -OutFile $env:USERPROFILE\Downloads\JetBrainsMono.zip
