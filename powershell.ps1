@@ -32,9 +32,6 @@ Remove-Item "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\
 Invoke-WebRequest https://raw.githubusercontent.com/jgsqware/dotfile-win/main/WindowsTerminal/settings.json -OutFile "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
     
 
-Store-Install -Apps `
-    'Hey: https://www.microsoft.com/store/productId/9PF08LJW7GW2'
-
 # Set Brave as default
 Invoke-WebRequest https://raw.githubusercontent.com/jgsqware/dotfile-win/main/bin/SetDefaultBrowser.exe -OutFile $env:USERPROFILE\Downloads\SetDefaultBrowser.exe
 $hive = & $env:USERPROFILE\Downloads\SetDefaultBrowser.exe | out-string -stream | select-string -Pattern '(HKCU) (Brave.*)'
@@ -46,8 +43,8 @@ Remove-Item $env:USERPROFILE\Downloads\SetDefaultBrowser.exe
 
 Invoke-WebRequest https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip -OutFile $env:USERPROFILE\Downloads\JetBrainsMono.zip
 
-$source = '$env:USERPROFILE\Downloads\JetBrainsMono.zip'
-$fontsFolder = '$env:USERPROFILE\Downloads\JetBrainsMono'
+$source = "$env:USERPROFILE\Downloads\JetBrainsMono.zip"
+$fontsFolder = "$env:USERPROFILE\Downloads\JetBrainsMono"
 
 Expand-Archive -Path $source -DestinationPath $fontsFolder
 
@@ -60,7 +57,12 @@ foreach ($font in Get-ChildItem -Path $fontsFolder -File) {
         $font | Copy-Item -Destination $dest
     }
 }
-Remove-Item $env:USERPROFILE\Downloads\JetBrainsMono*
+Remove-Item -recurse $env:USERPROFILE\Downloads\JetBrainsMono*
+
+Store-Install -Apps `
+    'Hey: https://www.microsoft.com/store/productId/9PF08LJW7GW2'
+
+Read-Host 'Press ENTER to continue...'
 
 
 # WSL 2
