@@ -20,13 +20,15 @@ DOTFILE=${HOME}/.config/dotfile
 KB_DOTFILE=${HOME}/.config/kb_dotfile
 
 
-SSHKEY="/mnt/c/Users/jgsqware/Downloads/id_rsa"
-echo "Configure Enpass and put ssh key in ${SSHKEY}"
+SSHWIN="/mnt/c/Users/jgsqware/Downloads/id_rsa"
+SSHKEY="/tmp/id_rsa"
+echo "Configure Enpass and put ssh key in ${SSHWIN}"
 
 read -p "Press any key to continue... " -n1 -s
 
 echo ""
 
+mv $SSHWIN $SSHKEY
 chmod 600 ${SSHKEY}
 
 if [[ ! -d ${KB_DOTFILE} ]]; then
