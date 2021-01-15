@@ -27,6 +27,9 @@ read -p "Press any key to continue... " -n1 -s
 
 echo ""
 
+chmod 400 ${SSHKEY}/id_rsa
+chmod 644 ${SSHKEY}/id_rsa.pub
+
 if [[ ! -d ${KB_DOTFILE} ]]; then
     ssh-agent bash -c "ssh-add ${SSHKEY}; git clone git@github.com:jgsqware/kb_dotfile.git ${KB_DOTFILE}"  
 else
