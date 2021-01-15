@@ -20,7 +20,7 @@ DOTFILE=${HOME}/.config/dotfile
 KB_DOTFILE=${HOME}/.config/kb_dotfile
 
 
-SSHKEY="/mnt/c/Users/jgsqware/Downloads/ssh/id_rsa"
+SSHKEY="/mnt/c/Users/jgsqware/Downloads/id_rsa"
 echo "Configure Enpass and put ssh key in ${SSHKEY}"
 
 read -p "Press any key to continue... " -n1 -s
