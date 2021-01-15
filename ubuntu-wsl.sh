@@ -20,16 +20,12 @@ DOTFILE=${HOME}/.config/dotfile
 KB_DOTFILE=${HOME}/.config/kb_dotfile
 
 
-SSHKEY="/mnt/c/Users/jgsqware/Downloads/ssh"
+SSHKEY="/mnt/c/Users/jgsqware/Downloads/ssh/id_rsa"
 echo "Configure Enpass and put ssh key in ${SSHKEY}"
 
 read -p "Press any key to continue... " -n1 -s
 
 echo ""
-
-chmod 700 ${SSHKEY}
-chmod 600 ${SSHKEY}/id_rsa
-chmod 644 ${SSHKEY}/id_rsa.pub
 
 if [[ ! -d ${KB_DOTFILE} ]]; then
     ssh-agent bash -c "ssh-add ${SSHKEY}; git clone git@github.com:jgsqware/kb_dotfile.git ${KB_DOTFILE}"  
