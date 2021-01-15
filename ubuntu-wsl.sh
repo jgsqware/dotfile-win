@@ -27,7 +27,8 @@ read -p "Press any key to continue... " -n1 -s
 
 echo ""
 
-chmod 400 ${SSHKEY}/id_rsa
+chmod 700 ${SSHKEY}
+chmod 600 ${SSHKEY}/id_rsa
 chmod 644 ${SSHKEY}/id_rsa.pub
 
 if [[ ! -d ${KB_DOTFILE} ]]; then
