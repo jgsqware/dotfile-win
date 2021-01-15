@@ -1,5 +1,5 @@
   
-#!/bin/bash
+#!/usr/bin/bash
 set -euo pipefail
 
 function xapt() {
