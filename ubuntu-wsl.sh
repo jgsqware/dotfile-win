@@ -69,6 +69,8 @@ ln -sf ${KB_DOTFILE}/.gitignore_global ${HOME}/.gitignore_global
 
 sudo apt update
 
+sudo apt upgrade
+
 xapt \
     fish \
     build-essential \
@@ -76,9 +78,10 @@ xapt \
     fzf \
     ripgrep \
     xclip \
-    go \
-    python-pip \
-    jq
+    golang \
+    python3-pip \
+    jq \
+    npm
 
 xpip \
     yq
@@ -86,18 +89,14 @@ xpip \
 sudo sed -i '/\/usr\/.crates2.json/d' /var/lib/dpkg/info/ripgrep.list
 xapt bat
 sudo ln -s batcat /usr/bin/bat
-
-
-# Fish
-ln -sf ${DOTFILE}/fish ~/.config/fish
-curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-fisher install jethrokuan/fzf
-
 curl -fsSL https://starship.rs/install.sh | bash
-ln -sf ${DOTFILE}/starship.toml ~/.config/starship.toml
 
-sudo chsh -s /usr/bin/fish
-
+# Kubernetes
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
 
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -109,3 +108,11 @@ xcargo \
     procs \
     zoxide \
     bottom
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+
+bash -c "fish ${DOTFILE}/install.fish"
+
+sudo chsh -s /usr/bin/fish $(whoami)

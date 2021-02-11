@@ -26,7 +26,17 @@ Choco-Install -Apps `
     discord, `
     enpass.install, `
     vscode, `
-    brave
+    brave, `
+    steam, `
+    ds4windows, `
+    bakkesmod, `
+    epicgameslauncher, `
+    slack, `
+    microsoft-teams, `
+    logitech-options, `
+    todoist, `
+    Github
+
 
 Write-Host '>> Configure Terminal'
 Remove-Item "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
@@ -62,7 +72,10 @@ foreach ($font in Get-ChildItem -Path $fontsFolder -File) {
 Remove-Item -recurse $env:USERPROFILE\Downloads\JetBrainsMono*
 
 Store-Install -Apps `
-    'Hey: https://www.microsoft.com/store/productId/9PF08LJW7GW2'
+    'Hey: https://www.microsoft.com/store/productId/9PF08LJW7GW2' `
+    'Krisp: https://account.krisp.ai/sign-up' `
+    'EOS Webcam Utility: https://fr.canon.be/cameras/eos-webcam-utility/' `
+    'Docker Desktop: https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe'
 
 Read-Host 'Press ENTER to continue...'
 
