@@ -19,6 +19,7 @@ alias top='btm'
 alias h="history"
 
 alias config="code $DOTFILE"
+alias credentials="nvim $HOME/.aws/credentials"
 
 ## Kubernetes
 
