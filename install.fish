@@ -14,4 +14,4 @@ curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 fisher install jethrokuan/fzf
 fisher install jhillyerd/plugin-git
 fisher install danhper/fish-ssh-agent
-fisher install aws
+fisher install oh-my-fish/plugin-aws

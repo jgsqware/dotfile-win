@@ -71,19 +71,7 @@ sudo apt update
 
 sudo apt upgrade
 
-xapt \
-    fish \
-    build-essential \
-    libssl-dev \
-    fzf \
-    ripgrep \
-    xclip \
-    golang \
-    python3-pip \
-    jq \
-    npm \
-    neovim \
-    httpie
+sudo apt-get install $(cat pkglist)
 
 xpip \
     yq

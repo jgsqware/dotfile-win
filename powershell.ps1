@@ -22,20 +22,43 @@ function Store-Install {
 # choco install -y spotify
 Write-Host '>> Install apps'
 Choco-Install -Apps `
-    microsoft-windows-terminal, `
-    discord, `
-    enpass.install, `
-    vscode, `
-    brave, `
-    steam, `
-    ds4windows, `
+    7zip, `
+    autohotkey, `
     bakkesmod, `
+    brave, `
+    chocolatey, `
+    chocolatey-core.extension, `
+    chocolatey-dotnetfx.extension, `
+    chocolatey-misc-helpers.extension, `
+    chocolatey-windowsupdate.extension, `
+    discord, `
+    DotNet4.5.2, `
+    dotnetcore3-desktop-runtime, `
+    dotnetfx, `
+    ds4windows, `
+    enpass.install, `
     epicgameslauncher, `
-    slack, `
+    ffmpeg, `
+    FiraCode, `
+    Firefox, `
+    foxitreader, `
+    KB2919355, `
+    KB2919442, `
+    KB2999226, `
+    KB3033929, `
+    KB3035131, `
     microsoft-teams, `
-    logitech-options, `
+    microsoft-windows-terminal, `
+    netfx-4.6.2, `
+    nordvpn, `
+    powertoys, `
+    slack, `
+    steam, `
     todoist, `
-    Github
+    transmission, `
+    vcredist140, `
+    vscode
+
 
 
 Write-Host '>> Configure Terminal'
@@ -53,10 +76,10 @@ Remove-Item $env:USERPROFILE\Downloads\SetDefaultBrowser.exe
 # Configure TaskBar https://docs.microsoft.com/en-us/windows/configuration/configure-windows-10-taskbar
 
 Write-Host '>> Install Fonts'
-Invoke-WebRequest https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip -OutFile $env:USERPROFILE\Downloads\JetBrainsMono.zip
+Invoke-WebRequest https://github.com/ThatWeirdAndrew/caskaydia-cove/releases/download/v2102.25/CaskaydiaCove.zip -OutFile $env:USERPROFILE\Downloads\CaskaydiaCove.zip
 
-$source = "$env:USERPROFILE\Downloads\JetBrainsMono.zip"
-$fontsFolder = "$env:USERPROFILE\Downloads\JetBrainsMono"
+$source = "$env:USERPROFILE\Downloads\CaskaydiaCove.zip"
+$fontsFolder = "$env:USERPROFILE\Downloads\CaskaydiaCove"
 
 Expand-Archive -Path $source -DestinationPath $fontsFolder
 
@@ -69,7 +92,7 @@ foreach ($font in Get-ChildItem -Path $fontsFolder -File) {
         $font | Copy-Item -Destination $dest
     }
 }
-Remove-Item -recurse $env:USERPROFILE\Downloads\JetBrainsMono*
+Remove-Item -recurse $env:USERPROFILE\Downloads\CaskaydiaCove*
 
 Store-Install -Apps `
     'Hey: https://www.microsoft.com/store/productId/9PF08LJW7GW2' `
