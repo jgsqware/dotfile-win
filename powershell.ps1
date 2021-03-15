@@ -67,19 +67,19 @@ Invoke-WebRequest https://raw.githubusercontent.com/jgsqware/dotfile-win/main/Wi
     
 Write-Host '>> Set Brave as default browser'
 # Set Brave as default
-Invoke-WebRequest https://raw.githubusercontent.com/jgsqware/dotfile-win/main/bin/SetDefaultBrowser.exe -OutFile $env:USERPROFILE\Downloads\SetDefaultBrowser.exe
-$hive = & $env:USERPROFILE\Downloads\SetDefaultBrowser.exe | out-string -stream | select-string -Pattern '(HKCU) (Brave.*)'
+Invoke-WebRequest https://raw.githubusercontent.com/jgsqware/dotfile-win/main/bin/SetDefaultBrowser.exe -OutFile C:\Users\jgsqware\Downloads\SetDefaultBrowser.exe
+$hive = & C:\Users\jgsqware\Downloads\SetDefaultBrowser.exe | out-string -stream | select-string -Pattern '(HKCU) (Brave.*)'
 
-powershell.exe -Command "$env:USERPROFILE\Downloads\SetDefaultBrowser.exe $hive"
-Remove-Item $env:USERPROFILE\Downloads\SetDefaultBrowser.exe
+powershell.exe -Command "C:\Users\jgsqware\Downloads\SetDefaultBrowser.exe $hive"
+Remove-Item C:\Users\jgsqware\Downloads\SetDefaultBrowser.exe
 
 # Configure TaskBar https://docs.microsoft.com/en-us/windows/configuration/configure-windows-10-taskbar
 
 Write-Host '>> Install Fonts'
 Invoke-WebRequest https://github.com/ThatWeirdAndrew/caskaydia-cove/releases/download/v2102.25/CaskaydiaCove.zip -OutFile $env:USERPROFILE\Downloads\CaskaydiaCove.zip
 
-$source = "$env:USERPROFILE\Downloads\CaskaydiaCove.zip"
-$fontsFolder = "$env:USERPROFILE\Downloads\CaskaydiaCove"
+$source = "C:\Users\jgsqware\Downloads\CaskaydiaCove.zip"
+$fontsFolder = "C:\Users\jgsqware\Downloads\CaskaydiaCove"
 
 Expand-Archive -Path $source -DestinationPath $fontsFolder
 
@@ -105,12 +105,12 @@ Read-Host 'Press ENTER to continue...'
 
 # WSL 2
 Write-Host '>> Setup WSL 2'
-$msiFilePath="$env:USERPROFILE\Downloads\wsl_update_x64.msi"
+$msiFilePath="C:\Users\jgsqware\Downloads\wsl_update_x64.msi"
 Invoke-WebRequest https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi -OutFile $msiFilePath
 
 $arguments = "/i `"$msiFilePath`""
 Start-Process msiexec.exe -ArgumentList $arguments -Wait
-Remove-Item -recurse $env:USERPROFILE\Downloads\wsl_update_x64.msi
+Remove-Item -recurse C:\Users\jgsqware\Downloads\wsl_update_x64.msi
 
 wsl --set-default-version 2
 
