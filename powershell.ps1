@@ -76,7 +76,7 @@ Remove-Item C:\Users\jgsqware\Downloads\SetDefaultBrowser.exe
 # Configure TaskBar https://docs.microsoft.com/en-us/windows/configuration/configure-windows-10-taskbar
 
 Write-Host '>> Install Fonts'
-Invoke-WebRequest https://github.com/ThatWeirdAndrew/caskaydia-cove/releases/download/v2102.25/CaskaydiaCove.zip -OutFile $env:USERPROFILE\Downloads\CaskaydiaCove.zip
+Invoke-WebRequest https://github.com/ThatWeirdAndrew/caskaydia-cove/releases/download/v2102.25/CaskaydiaCove.zip -OutFile C:\Users\jgsqware\Downloads\CaskaydiaCove.zip
 
 $source = "C:\Users\jgsqware\Downloads\CaskaydiaCove.zip"
 $fontsFolder = "C:\Users\jgsqware\Downloads\CaskaydiaCove"
