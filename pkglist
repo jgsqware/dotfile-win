@@ -2,7 +2,6 @@ apt-transport-https
 base-files
 base-passwd
 bash
-bat
 build-essential
 cloud-init
 dash
@@ -104,7 +103,6 @@ python3-pyrsistent
 python3-serial
 python3-setuptools
 python3-zipp
-ripgrep
 show-motd
 source-highlight
 ssh-import-id
