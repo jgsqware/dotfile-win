@@ -1,21 +1,5 @@
-  
 #!/usr/bin/bash
 set -euo pipefail
-
-function xapt() {
-    sudo apt install -y -qq "$@"
-}
-
-function xcargo() {
-    cargo install "$@"
-}
-
-function xpip(){
-    pip install "$1" --user --upgrade
-}
-
-export XDG_CONFIG_HOME="${HOME}/.config"
-
 DOTFILE=${HOME}/.config/dotfile
 KB_DOTFILE=${HOME}/.config/kb_dotfile
 
@@ -54,60 +38,12 @@ else
     )
 fi
 
-rm -rf ${HOME}/.ssh
-ln -fs ${KB_DOTFILE}/ssh/ ${HOME}/.ssh
-chmod 400 ${HOME}/.ssh/id_rsa
-chmod 644 ${HOME}/.ssh/id_rsa.pub
-gpg --import ${KB_DOTFILE}/gpg/gpg-private-keys.asc
-gpg --import ${KB_DOTFILE}/gpg/gpg-public-keys.asc
-gpg --import-ownertrust ${KB_DOTFILE}/gpg/otrust.txt
+curl -L https://nixos.org/nix/install | sh -s
+. /home/jgsqware/.nix-profile/etc/profile.d/nix.sh
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
 
-ln -sf ${KB_DOTFILE}/.gitconfig ${HOME}/.gitconfig
-ln -sf ${KB_DOTFILE}/.gitignore_global ${HOME}/.gitignore_global
-
-# Bash
-
-sudo apt update
-
-sudo apt upgrade
-
-sudo apt-get install $(cat pkglist)
-
-xpip \
-    yq
-
-sudo sed -i '/\/usr\/.crates2.json/d' /var/lib/dpkg/info/ripgrep.list
-xapt bat
-sudo ln -s batcat /usr/bin/bat
-curl -fsSL https://starship.rs/install.sh | bash
-
-# Kubernetes
-sudo apt-get update && sudo apt-get install -y apt-transport-https
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-sudo apt-get update
-sudo apt-get install -y kubectl
-
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-sudo apt-add-repository https://cli.github.com/packages
-sudo apt update
-sudo apt install gh
-
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# Cargo
-
-xcargo \
-    exa \
-    procs \
-    zoxide \
-    bottom
-
-sudo groupadd docker
-sudo usermod -aG docker $USER
-
-
-bash -c "fish ${DOTFILE}/install.fish"
-
-sudo chsh -s /usr/bin/fish $(whoami)
+export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+nix-shell '<home-manager>' -A install
+ln -fs $HOME/.config/kb_dotfile/nixpkgs/home.nix .config/nixpkgs/home.nix
+home-manager switch

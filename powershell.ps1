@@ -19,52 +19,59 @@ function Store-Install {
     }
 }
 
-# choco install -y spotify
 Write-Host '>> Install apps'
 Choco-Install -Apps `
-    7zip, `
-    autohotkey, `
-    bakkesmod, `
-    brave, `
-    chocolatey, `
-    chocolatey-core.extension, `
-    chocolatey-dotnetfx.extension, `
-    chocolatey-misc-helpers.extension, `
-    chocolatey-windowsupdate.extension, `
-    discord, `
-    DotNet4.5.2, `
-    dotnetcore3-desktop-runtime, `
-    dotnetfx, `
-    ds4windows, `
-    enpass.install, `
-    epicgameslauncher, `
-    ffmpeg, `
-    FiraCode, `
-    Firefox, `
-    foxitreader, `
-    KB2919355, `
-    KB2919442, `
-    KB2999226, `
-    KB3033929, `
-    KB3035131, `
-    microsoft-teams, `
-    microsoft-windows-terminal, `
-    netfx-4.6.2, `
-    nordvpn, `
-    powertoys, `
-    slack, `
-    steam, `
-    todoist, `
-    transmission, `
-    vcredist140, `
+    7zip
+    authy-desktop
+    autohotkey
+    brave
+    chocolatey
+    chocolatey-core.extension
+    chocolatey-dotnetfx.extension
+    chocolatey-misc-helpers.extension
+    chocolatey-windowsupdate.extension
+    discord
+    DotNet4.5.2
+    dotnet4.7
+    dotnetcore3-desktop-runtime
+    dotnetfx
+    ds4windows
+    epicgameslauncher
+    ffmpeg
+    FiraCode
+    Firefox
+    foxitreader
+    fzf
+    git
+    goggalaxy
+    KB2919355
+    KB2919442
+    KB2999226
+    KB3033929
+    KB3035131
+    keybase
+    microsoft-teams
+    microsoft-windows-terminal
+    musescore
+    netfx-4.6.2
+    nordvpn
+    powertoys
+    rufus
+    slack
+    steam
+    steam-client
+    todoist
+    transmission
+    vcredist140
+    vcredist2015
     vscode
 
 
 
 Write-Host '>> Configure Terminal'
-Remove-Item "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-Invoke-WebRequest https://raw.githubusercontent.com/jgsqware/dotfile-win/main/WindowsTerminal/settings.json -OutFile "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-    
+Write-Host 'Update config with content of https://raw.githubusercontent.com/jgsqware/dotfile-win/main/WindowsTerminal/settings.json'
+Read-Host 'Press ENTER to continue...'
+
 Write-Host '>> Set Brave as default browser'
 # Set Brave as default
 Invoke-WebRequest https://raw.githubusercontent.com/jgsqware/dotfile-win/main/bin/SetDefaultBrowser.exe -OutFile C:\Users\jgsqware\Downloads\SetDefaultBrowser.exe
