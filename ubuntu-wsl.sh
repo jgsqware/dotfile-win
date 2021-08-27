@@ -40,6 +40,7 @@ fi
 
 curl -L https://nixos.org/nix/install | sh -s
 . /home/jgsqware/.nix-profile/etc/profile.d/nix.sh
+echo ". /home/jgsqware/.nix-profile/etc/profile.d/nix.sh" > .profile
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 

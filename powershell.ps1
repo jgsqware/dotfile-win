@@ -19,51 +19,65 @@ function Store-Install {
     }
 }
 
+function Module-Install {
+    [CmdletBinding()]
+    param (
+        [string[]]$Apps
+    )
+
+    Write-Host ">> Install those Modules"
+    foreach ($app in $Apps) {
+        Install-Module -AllowClobber -Confirm:$False -Force -Scope CurrentUser $app
+    }
+}
+
+Set-PSRepository PSGallery -InstallationPolicy Trusted
+
 Write-Host '>> Install apps'
 Choco-Install -Apps `
-    7zip
-    authy-desktop
-    autohotkey
-    brave
-    chocolatey
-    chocolatey-core.extension
-    chocolatey-dotnetfx.extension
-    chocolatey-misc-helpers.extension
-    chocolatey-windowsupdate.extension
-    discord
-    DotNet4.5.2
-    dotnet4.7
-    dotnetcore3-desktop-runtime
-    dotnetfx
-    ds4windows
-    epicgameslauncher
-    ffmpeg
-    FiraCode
-    Firefox
-    foxitreader
-    fzf
-    git
-    goggalaxy
-    KB2919355
-    KB2919442
-    KB2999226
-    KB3033929
-    KB3035131
-    keybase
-    microsoft-teams
-    microsoft-windows-terminal
-    musescore
-    netfx-4.6.2
-    nordvpn
-    powertoys
-    rufus
-    slack
-    steam
-    steam-client
-    todoist
-    transmission
-    vcredist140
-    vcredist2015
+    7zip, `
+    authy-desktop, `
+    autohotkey, `
+    brave, `
+    chocolatey, `
+    chocolatey-core.extension, `
+    chocolatey-dotnetfx.extension, `
+    chocolatey-misc-helpers.extension, `
+    chocolatey-windowsupdate.extension, `
+    discord, `
+    DotNet4.5.2, `
+    dotnet4.7, `
+    dotnetcore3-desktop-runtime, `
+    dotnetfx, `
+    ds4windows, `
+    epicgameslauncher, `
+    ffmpeg, `
+    FiraCode, `
+    Firefox, `
+    foxitreader, `
+    fzf, `
+    git, `
+    goggalaxy, `
+    KB2919355, `
+    KB2919442, `
+    KB2999226, `
+    KB3033929, `
+    KB3035131, `
+    keybase, `
+    microsoft-teams, `
+    microsoft-windows-terminal, `
+    musescore, `
+    netfx-4.6.2, `
+    nordvpn, `
+    powertoys, `
+    rufus, `
+    slack, `
+    steam, `
+    steam-client, `
+    todoist, `
+    transmission, `
+    vcredist140, `
+    vcredist2015, `
     vscode
 
 
@@ -109,6 +123,21 @@ Store-Install -Apps `
 
 Read-Host 'Press ENTER to continue...'
 
+# Latest Powershell
+Write-Host '>> Setup Powershell 7.1.4'
+$msiFilePath="C:\Users\jgsqware\Downloads\PowerShell-7.1.4-win-x64.msi"
+Invoke-WebRequest https://github.com/PowerShell/PowerShell/releases/download/v7.1.4/PowerShell-7.1.4-win-x64.msi -OutFile $msiFilePath
+
+$arguments = "/i `"$msiFilePath`" /quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1"
+Start-Process msiexec.exe -ArgumentList $arguments -Wait
+Remove-Item -recurse C:\Users\jgsqware\Downloads\PowerShell-7.1.4-win-x64.msi
+
+Module-Install -Apps `
+    oh-my-posh `
+    PSFzf `
+    Get-ChildItemColor
+
+
 
 # WSL 2
 Write-Host '>> Setup WSL 2'
@@ -127,3 +156,11 @@ Write-Host 'Open a new Ubuntu shell and run'
 Write-Host '  curl -L https://raw.githubusercontent.com/jgsqware/dotfile-win/main/ubuntu-wsl.sh | sh' -ForegroundColor Blue
 
 Read-Host 'Press ENTER to continue...'
+
+
+Write-Host "
+Set-PoshPrompt -Theme material
+Remove-PSReadlineKeyHandler 'Ctrl-r'
+Import-Module PSFzf
+Import-Module Get-ChildItemColor
+"
