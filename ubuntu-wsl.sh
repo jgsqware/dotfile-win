@@ -38,6 +38,7 @@ else
     )
 fi
 
+cd $HOME
 curl -L https://nixos.org/nix/install | sh -s
 . /home/jgsqware/.nix-profile/etc/profile.d/nix.sh
 echo ". /home/jgsqware/.nix-profile/etc/profile.d/nix.sh" > .profile
